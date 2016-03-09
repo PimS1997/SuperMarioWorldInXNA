@@ -18,6 +18,7 @@ namespace SuperMarioWorldInXNA
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Vector2 pos;
 
         public Game()
         {
@@ -36,6 +37,7 @@ namespace SuperMarioWorldInXNA
             // TODO: Add your initialization logic here
 
             base.Initialize();
+            
         }
 
         /// <summary>
@@ -46,7 +48,9 @@ namespace SuperMarioWorldInXNA
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            pos.X = 100;
+            pos.Y = 100;
+            Player player = new Player(pos);
             // TODO: use this.Content to load your game content here
         }
 

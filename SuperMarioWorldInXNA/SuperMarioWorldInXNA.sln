@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperMarioWorldInXNA", "SuperMarioWorldInXNA\SuperMarioWorldInXNA\SuperMarioWorldInXNA.csproj", "{AD17A95B-1D34-478F-AC90-D71641F776E0}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "SuperMarioWorldInXNAContent", "SuperMarioWorldInXNA\SuperMarioWorldInXNAContent\SuperMarioWorldInXNAContent.contentproj", "{6FF7A0B7-D48E-454B-A2FD-FB3275A91C00}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Content", "SuperMarioWorldInXNA\SuperMarioWorldInXNAContent\Content.contentproj", "{6FF7A0B7-D48E-454B-A2FD-FB3275A91C00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
