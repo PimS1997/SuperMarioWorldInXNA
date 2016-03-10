@@ -19,7 +19,7 @@ namespace SuperMarioWorldInXNA
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Vector2 pos;
-
+        Player player;
         public Game()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -50,7 +50,7 @@ namespace SuperMarioWorldInXNA
             spriteBatch = new SpriteBatch(GraphicsDevice);
             pos.X = 100;
             pos.Y = 100;
-            Player player = new Player(pos);
+            player = new Player(pos);
             // TODO: use this.Content to load your game content here
         }
 
@@ -86,7 +86,7 @@ namespace SuperMarioWorldInXNA
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            player.Draw(gameTime, spriteBatch);
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);

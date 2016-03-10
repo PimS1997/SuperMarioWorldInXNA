@@ -24,12 +24,6 @@ namespace SuperMarioWorldInXNA
         private const float MaxMoveSpeed = 1800f;
         private const float MoveAcceleration = 13000f;
 
-        public Level Level
-        {
-            get { return level; }
-        }
-        Level level;
-
         public Vector2 Velocity
         {
             get { return velocity; }
@@ -51,10 +45,9 @@ namespace SuperMarioWorldInXNA
 
         public Player(Vector2 position)
         {
-            
-            content = new ContentManager(content.ServiceProvider, "Content");
             //this.level = level;
-
+            content = new ContentManager(serviceProvider);
+            content.RootDirectory = "Content";
             LoadContent();
 
             Reset(position);
