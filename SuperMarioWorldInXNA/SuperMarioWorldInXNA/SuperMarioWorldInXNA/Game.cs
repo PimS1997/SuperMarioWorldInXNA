@@ -88,7 +88,7 @@ namespace SuperMarioWorldInXNA
             GraphicsDevice.Clear(Color.CornflowerBlue);
             player.Draw(gameTime, spriteBatch);
             // TODO: Add your drawing code here
-
+            
             base.Draw(gameTime);
         }
     }
