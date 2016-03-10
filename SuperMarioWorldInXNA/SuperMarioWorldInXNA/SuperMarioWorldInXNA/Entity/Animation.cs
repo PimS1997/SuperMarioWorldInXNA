@@ -11,6 +11,17 @@ namespace SuperMarioWorldInXNA
             get { return texture; }
         }
         Texture2D texture;
+        public int Rows
+        {
+            get { return rows; }
+        }
+        int rows;
+
+        public int Columns
+        {
+            get { return columns; }
+        }
+        int columns;
 
         /// <summary>
         /// Duration of time to show each frame.
@@ -20,7 +31,6 @@ namespace SuperMarioWorldInXNA
             get { return frameTime; }
         }
         float frameTime;
-
         /// <summary>
         /// When the end of the animation is reached, should it
         /// continue playing from the beginning?
@@ -36,16 +46,16 @@ namespace SuperMarioWorldInXNA
         /// </summary>
         public int FrameCount
         {
-            get { return Texture.Width / FrameWidth; }
+            get { return frameCount; }
         }
-
+        int frameCount;
         /// <summary>
         /// Gets the width of a frame in the animation.
         /// </summary>
         public int FrameWidth
         {
             // Assume square frames.
-            get { return Texture.Height; }
+            get { return Texture.Width / columns; }
         }
 
         /// <summary>
@@ -53,17 +63,20 @@ namespace SuperMarioWorldInXNA
         /// </summary>
         public int FrameHeight
         {
-            get { return Texture.Height; }
+            get { return Texture.Height / rows; }
         }
 
         /// <summary>
         /// Constructors a new animation.
         /// </summary>        
-        public Animation(Texture2D texture, float frameTime, bool isLooping)
+        public Animation(Texture2D texture, float frameTime, bool isLooping, int columns, int rows, int frameCount)
         {
             this.texture = texture;
             this.frameTime = frameTime;
             this.isLooping = isLooping;
+            this.rows = rows;
+            this.columns = columns;
+            this.frameCount = frameCount;
         }
     }
 }

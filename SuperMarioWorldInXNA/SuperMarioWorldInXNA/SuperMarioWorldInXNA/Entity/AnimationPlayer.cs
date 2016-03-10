@@ -78,10 +78,25 @@ namespace SuperMarioWorldInXNA
             }
 
             // Calculate the source rectangle of the current frame.
-            Rectangle source = new Rectangle(FrameIndex * Animation.Texture.Height, 0, Animation.Texture.Height, Animation.Texture.Height);
+            Rectangle source = new Rectangle(FrameIndex * (Animation.Texture.Height / Animation.Columns), 0, Animation.Texture.Width / Animation.Columns, Animation.Texture.Height / Animation.Rows);
 
             // Draw the current frame.
             spriteBatch.Draw(Animation.Texture, position, source, Color.White, 0.0f, Origin, 1.0f, spriteEffects, 0.0f);
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

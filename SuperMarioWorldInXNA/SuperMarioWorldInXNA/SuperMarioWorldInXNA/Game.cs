@@ -19,11 +19,12 @@ namespace SuperMarioWorldInXNA
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Vector2 pos;
-
+        Player player;
         public Game()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
         }
 
         /// <summary>
@@ -50,7 +51,7 @@ namespace SuperMarioWorldInXNA
             spriteBatch = new SpriteBatch(GraphicsDevice);
             pos.X = 100;
             pos.Y = 100;
-            Player player = new Player(pos);
+            player = new Player(pos, Services);
             // TODO: use this.Content to load your game content here
         }
 
@@ -75,6 +76,7 @@ namespace SuperMarioWorldInXNA
                 this.Exit();
 
             // TODO: Add your update logic here
+            player.Update(gameTime, Keyboard.GetState());
 
             base.Update(gameTime);
         }
@@ -86,8 +88,11 @@ namespace SuperMarioWorldInXNA
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
             // TODO: Add your drawing code here
+
+            spriteBatch.Begin();
+            player.Draw(gameTime, spriteBatch);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
