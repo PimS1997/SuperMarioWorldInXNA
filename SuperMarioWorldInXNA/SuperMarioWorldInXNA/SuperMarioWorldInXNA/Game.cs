@@ -37,8 +37,7 @@ namespace SuperMarioWorldInXNA
         {
             // TODO: Add your initialization logic here
 
-            base.Initialize();
-            
+            base.Initialize();      
         }
 
         /// <summary>
@@ -49,8 +48,8 @@ namespace SuperMarioWorldInXNA
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            pos.X = 100;
-            pos.Y = 100;
+            pos.X = GraphicsDevice.PresentationParameters.BackBufferWidth / 2;
+            pos.Y = GraphicsDevice.PresentationParameters.BackBufferHeight / 2;
             player = new Player(pos, Services);
             // TODO: use this.Content to load your game content here
         }
@@ -90,7 +89,7 @@ namespace SuperMarioWorldInXNA
             GraphicsDevice.Clear(Color.CornflowerBlue);
             // TODO: Add your drawing code here
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise);
             player.Draw(gameTime, spriteBatch);
             spriteBatch.End();
 

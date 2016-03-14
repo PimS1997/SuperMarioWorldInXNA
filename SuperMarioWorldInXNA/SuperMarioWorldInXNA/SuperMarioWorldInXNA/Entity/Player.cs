@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -27,7 +28,26 @@ namespace SuperMarioWorldInXNA
         private int spriteSheetWidth = 32; //Tiles
         private int spriteSheetHeight = 16; //Tiles
 
+        private int frameCountRun = 2;
+        private int frameCountIdle = 1;
+        private float frameTime = 0.1f;
+        private int startPosRun = 0;
+
+        private float scale = 2.0f;
+
         private bool IsOnGround = true;
+
+        private SoundEffect jumpSound;
+
+        private bool isJumping;
+        private bool wasJumping;
+        private float jumpTime;
+
+        float VelocityX;
+        float VelocityY = 0.0f;
+        float gravity = 2.5f;
+        float JumpHeight = 250.0f;
+        Vector2 startPos;
 
         private const float GroundDragFactor = 0.48f;
 
@@ -71,11 +91,14 @@ namespace SuperMarioWorldInXNA
         {
             content = new ContentManager(serviceProvider, "Content");
 
-            runAnimation = new Animation(content.Load<Texture2D>("Sprites/Mario/mario"), 0.1f, true, spriteSheetWidth, spriteSheetHeight, 2);
-            idleAnimation = new Animation(content.Load<Texture2D>("Sprites/Mario/mario"), 0.1f, true, spriteSheetWidth, spriteSheetHeight, 1);
+            runAnimation = new Animation(content.Load<Texture2D>("Sprites/Mario/mario"), frameTime, true, spriteSheetWidth, spriteSheetHeight, frameCountRun, startPosRun, scale);
+            idleAnimation = new Animation(content.Load<Texture2D>("Sprites/Mario/mario"), frameTime, true, spriteSheetWidth, spriteSheetHeight, frameCountIdle, startPosRun, scale);
+
+            //jumpSound = Level.Content.Load<SoundEffect>("Sounds/PlayerJump");
         }
         public void Reset(Vector2 position)
         {
+            startPos = position;
             Position = position;
             Velocity = Vector2.Zero;
             isAlive = true;
@@ -87,7 +110,7 @@ namespace SuperMarioWorldInXNA
 
             //ApplyPhysics(gameTime);
 
-            if (Math.Abs(Velocity.X) - 0.02f > 0)
+            if (Math.Abs(Velocity.X) != 0)
             {
                 sprite.PlayAnimation(runAnimation);
             }
@@ -95,6 +118,24 @@ namespace SuperMarioWorldInXNA
             {
                 sprite.PlayAnimation(idleAnimation);
             }
+
+            if ((position.Y - startPos.Y) > JumpHeight)
+            {
+                position.Y = startPos.Y;
+                velocity.Y = 0.0f;
+                IsOnGround = true;
+            }
+            if (!IsOnGround &&)
+            {
+                velocity.Y += gravity;
+                position.Y += velocity.Y;
+            }
+            else
+            {
+                position.Y = startPos.Y;
+            }
+
+
         }
 
         public void GetInput(KeyboardState keyboardState, GameTime gameTime)
@@ -106,6 +147,10 @@ namespace SuperMarioWorldInXNA
             else if (keyboardState.IsKeyDown(Keys.D))
             {
                 Move(true, gameTime);
+            }
+            if(keyboardState.IsKeyDown(Keys.W))
+            {
+                Jump(gameTime);
             }
 
         }
@@ -123,6 +168,16 @@ namespace SuperMarioWorldInXNA
             }
             Position += velocity * elapsed;
             Position = new Vector2((float)Math.Round(Position.X), (float)Math.Round(Position.Y));
+        }
+
+        private float Jump(GameTime gameTime)
+        {
+            if (IsOnGround)
+            {
+                velocity.Y = -25.0f;
+                IsOnGround = false;
+            }
+            return velocity.Y;
         }
 
         public void ApplyPhysics(GameTime gameTime)
@@ -151,6 +206,7 @@ namespace SuperMarioWorldInXNA
                 flip = SpriteEffects.FlipHorizontally;
 
             sprite.Draw(gameTime, spriteBatch, Position, flip);
+            velocity.X = 0f;
         }
     }
 }

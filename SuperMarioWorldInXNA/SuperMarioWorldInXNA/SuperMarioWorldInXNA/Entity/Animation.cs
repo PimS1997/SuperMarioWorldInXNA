@@ -22,7 +22,17 @@ namespace SuperMarioWorldInXNA
             get { return columns; }
         }
         int columns;
+        public float Scale
+        {
+            get { return scale; }
+        }
+        float scale;
 
+        public int StartPos
+        {
+            get { return startPos; }
+        }
+        int startPos;
         /// <summary>
         /// Duration of time to show each frame.
         /// </summary>
@@ -69,7 +79,7 @@ namespace SuperMarioWorldInXNA
         /// <summary>
         /// Constructors a new animation.
         /// </summary>        
-        public Animation(Texture2D texture, float frameTime, bool isLooping, int columns, int rows, int frameCount)
+        public Animation(Texture2D texture, float frameTime, bool isLooping, int columns, int rows, int frameCount, int startPos, float scale)
         {
             this.texture = texture;
             this.frameTime = frameTime;
@@ -77,6 +87,8 @@ namespace SuperMarioWorldInXNA
             this.rows = rows;
             this.columns = columns;
             this.frameCount = frameCount;
+            this.startPos = startPos;
+            this.scale = scale;
         }
     }
 }
